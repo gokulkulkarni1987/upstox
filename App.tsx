@@ -7,10 +7,13 @@
 
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import StockHoldings from './src/screens/StockHoldings';
+import StockHoldings from './src/features/stock-holding/StockHoldings';
 import {ThemeContext} from './src/styles/ThemeProvider';
 import {lightTheme} from './src/styles/theme';
 import {ThemeContextType} from './src/types/ThemeTypes';
+import {store} from './src/redux/store';
+import {Provider} from 'react-redux';
+import {USER_ID} from './src/constants';
 
 function App(): React.JSX.Element {
   const [theme, _setTheme] = useState<ThemeContextType>({
@@ -20,7 +23,9 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <ThemeContext.Provider value={theme}>
-        <StockHoldings />
+        <Provider store={store}>
+          <StockHoldings userId={USER_ID} />
+        </Provider>
       </ThemeContext.Provider>
     </SafeAreaView>
   );
