@@ -7,7 +7,7 @@ interface StockHoldingsProps {}
 const StockHoldings: React.FC<StockHoldingsProps> = ({}) => {
   return (
     <View style={styles.container}>
-      <Header title="Upstox" />
+      <Header title="Upstox Holding" />
       <Text>StockHoldings</Text>
     </View>
   );
