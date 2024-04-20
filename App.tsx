@@ -15,6 +15,7 @@ import {persistor, store} from './src/redux/store';
 import {ThemeContext} from './src/styles/ThemeProvider';
 import {lightTheme} from './src/styles/theme';
 import {ThemeContextType} from './src/types/ThemeTypes';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   const [theme, _setTheme] = useState<ThemeContextType>({
@@ -23,13 +24,15 @@ function App(): React.JSX.Element {
   });
   return (
     <SafeAreaView style={styles.container}>
-      <ThemeContext.Provider value={theme}>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <StockHoldings userId={USER_ID} />
-          </PersistGate>
-        </Provider>
-      </ThemeContext.Provider>
+      <GestureHandlerRootView style={styles.container}>
+        <ThemeContext.Provider value={theme}>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <StockHoldings userId={USER_ID} />
+            </PersistGate>
+          </Provider>
+        </ThemeContext.Provider>
+      </GestureHandlerRootView>
     </SafeAreaView>
   );
 }

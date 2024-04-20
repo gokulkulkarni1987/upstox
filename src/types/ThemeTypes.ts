@@ -3,6 +3,7 @@ export interface ThemeType {
   secondary: string;
   error: string;
   warning: string;
+  bgColor: string;
 }
 
 export interface ThemeContextType {

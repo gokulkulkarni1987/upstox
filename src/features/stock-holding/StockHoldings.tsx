@@ -4,6 +4,8 @@ import Header from '../../components/Header';
 import {useFetchHoldingsForUserQuery} from './redux/StockHoldingService';
 import UserHoldingItem from './UserHoldingItem';
 import {Holding} from './stockHoldingTypes';
+import {ThemeContext} from '../../styles/ThemeProvider';
+import PortfolioSummary from '../../components/PortfolioSummary';
 
 interface StockHoldingsProps {
   userId: string;
@@ -16,6 +18,7 @@ const StockHoldings: React.FC<StockHoldingsProps> = ({userId}) => {
       refetchOnMountOrArgChange: true,
     },
   );
+  const styles = useStockHoldingStyles();
 
   console.log({
     isFetching,
@@ -38,14 +41,23 @@ const StockHoldings: React.FC<StockHoldingsProps> = ({userId}) => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
       />
+      <PortfolioSummary userHoldings={data?.userHolding} />
     </View>
   );
 };
 
 export default StockHoldings;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+const useStockHoldingStyles = () => {
+  const {theme} = React.useContext(ThemeContext);
+  return React.useMemo(
+    () =>
+      StyleSheet.create({
+        container: {
+          flex: 1,
+          backgroundColor: theme.bgColor,
+        },
+      }),
+    [theme.bgColor],
+  );
+};

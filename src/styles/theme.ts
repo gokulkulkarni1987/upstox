@@ -5,6 +5,7 @@ export const darkTheme: ThemeType = {
   secondary: '',
   warning: '',
   error: '',
+  bgColor: '',
 };
 
 export const lightTheme: ThemeType = {
@@ -12,4 +13,5 @@ export const lightTheme: ThemeType = {
   secondary: '',
   warning: '',
   error: '',
+  bgColor: '#C3C3C8',
 };
