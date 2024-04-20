@@ -1,37 +1,23 @@
+import LottieView from 'lottie-react-native';
 import * as React from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  ListRenderItem,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
 import Header from '../../components/Header';
-import {useFetchHoldingsForUserQuery} from './redux/StockHoldingService';
-import UserHoldingItem from './UserHoldingItem';
-import {Holding} from './stockHoldingTypes';
-import {ThemeContext} from '../../styles/ThemeProvider';
 import PortfolioSummary from '../../components/PortfolioSummary';
 import Text from '../../components/Text';
+import {ThemeContext} from '../../styles/ThemeProvider';
+import UserHoldingItem from './UserHoldingItem';
+import {useFetchHoldingsForUserQuery} from './redux/StockHoldingService';
+import {Holding} from './stockHoldingTypes';
 
 interface StockHoldingsProps {
   userId: string;
 }
 
 const StockHoldings: React.FC<StockHoldingsProps> = ({userId}) => {
-  const {isFetching, isError, isSuccess, data} = useFetchHoldingsForUserQuery(
-    userId,
-    {
-      refetchOnMountOrArgChange: true,
-    },
-  );
-  const styles = useStockHoldingStyles();
-
-  console.log({
-    isFetching,
-    isError,
-    isSuccess,
+  const {isFetching, isError, data} = useFetchHoldingsForUserQuery(userId, {
+    refetchOnMountOrArgChange: true,
   });
+  const styles = useStockHoldingStyles();
 
   const renderItem: ListRenderItem<Holding> = React.useCallback(
     ({item, index}) => <UserHoldingItem item={item} index={index} />,
@@ -44,7 +30,12 @@ const StockHoldings: React.FC<StockHoldingsProps> = ({userId}) => {
     if (isFetching) {
       return (
         <View style={styles.centerContainer}>
-          <ActivityIndicator />
+          <LottieView
+            source={require('../../assets/loading.json')}
+            autoPlay
+            loop
+            style={styles.loading}
+          />
         </View>
       );
     }
@@ -72,6 +63,7 @@ const StockHoldings: React.FC<StockHoldingsProps> = ({userId}) => {
     keyExtractor,
     renderItem,
     styles.centerContainer,
+    styles.loading,
   ]);
 
   return (
@@ -97,6 +89,11 @@ const useStockHoldingStyles = () => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
+          backgroundColor: 'white',
+        },
+        loading: {
+          height: 200,
+          width: 200,
         },
       }),
     [theme.bgColor],
