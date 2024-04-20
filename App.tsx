@@ -7,13 +7,14 @@
 
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {USER_ID} from './src/constants';
 import StockHoldings from './src/features/stock-holding/StockHoldings';
+import {persistor, store} from './src/redux/store';
 import {ThemeContext} from './src/styles/ThemeProvider';
 import {lightTheme} from './src/styles/theme';
 import {ThemeContextType} from './src/types/ThemeTypes';
-import {store} from './src/redux/store';
-import {Provider} from 'react-redux';
-import {USER_ID} from './src/constants';
 
 function App(): React.JSX.Element {
   const [theme, _setTheme] = useState<ThemeContextType>({
@@ -24,7 +25,9 @@ function App(): React.JSX.Element {
     <SafeAreaView style={styles.container}>
       <ThemeContext.Provider value={theme}>
         <Provider store={store}>
-          <StockHoldings userId={USER_ID} />
+          <PersistGate loading={null} persistor={persistor}>
+            <StockHoldings userId={USER_ID} />
+          </PersistGate>
         </Provider>
       </ThemeContext.Provider>
     </SafeAreaView>
