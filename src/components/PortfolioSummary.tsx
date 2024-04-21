@@ -23,7 +23,7 @@ const BottomSheetOpenHandle = ({
     <Pressable
       onPress={handleBottomSheetClosePressed}
       style={styles.handleContainer}>
-      <Icon name={'chevron-down'} size={24} />
+      <Icon name={'chevron-down'} size={24} color={'black'} />
     </Pressable>
   );
 };
@@ -66,7 +66,7 @@ const PortfolioSummary: React.FC<PortfolioSummaryProps> = ({userHoldings}) => {
     <>
       {index === -1 && (
         <Pressable onPress={handleOpenBottomSheet} style={styles.container}>
-          <Icon name={'chevron-up'} size={24} />
+          <Icon name={'chevron-up'} size={24} color={'black'} />
           <LabelValue
             label="Profit & Loss"
             value={`₹ ${roundOffValues(totalPNL)}`}

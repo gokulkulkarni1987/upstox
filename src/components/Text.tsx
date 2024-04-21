@@ -50,35 +50,42 @@ const typoGraphyStyles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     lineHeight: 41,
+    color: 'black',
   },
   H2: {
     fontWeight: '700',
     fontSize: 24,
     lineHeight: 33,
+    color: 'black',
   },
   H3: {
     fontWeight: 'bold',
     fontSize: 16,
     lineHeight: 20,
+    color: 'black',
   },
   H4: {
     fontWeight: 'bold',
     fontSize: 14,
     lineHeight: 19,
+    color: 'black',
   },
   P1: {
     fontWeight: 'normal',
     fontSize: 16,
     lineHeight: 20,
+    color: 'black',
   },
   P2: {
     fontWeight: 'normal',
     fontSize: 14,
     lineHeight: 19,
+    color: 'black',
   },
   P3: {
     fontWeight: 'normal',
     fontSize: 10,
     lineHeight: 14,
+    color: 'black',
   },
 });
