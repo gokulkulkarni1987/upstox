@@ -1,7 +1,7 @@
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 import {BottomSheetMethods} from '@gorhom/bottom-sheet/lib/typescript/types';
 import * as React from 'react';
-import {Pressable, StyleSheet} from 'react-native';
+import {Platform, Pressable, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Holding} from '../features/stock-holding/stockHoldingTypes';
 import {roundOffValues} from '../utils/utils';
@@ -30,7 +30,7 @@ const BottomSheetOpenHandle = ({
 
 const PortfolioSummary: React.FC<PortfolioSummaryProps> = ({userHoldings}) => {
   const bottomSheetRef = React.useRef<BottomSheet>(null);
-  const snapPoints = React.useMemo(() => ['20%'], []);
+  const snapPoints = React.useMemo(() => ['25%'], []);
   const [index, setIndex] = React.useState(-1);
 
   const currentTotal = userHoldings?.reduce(
@@ -114,6 +114,11 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
     paddingTop: 5,
+    ...Platform.select({
+      android: {
+        paddingBottom: 20,
+      },
+    }),
   },
   value: {
     textAlign: 'right',
